@@ -13,7 +13,7 @@ source:
 build:
   number: {{ build }}
   string: py{{ PY_VER.replace(".", "") }}h{{ PKG_HASH }}_{{ opencl_impl }}_{{ build }}
-  skip: true  # [win or cuda_compiler_version != '10.2' or (not py37)]
+  skip: true  # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
   script_env:

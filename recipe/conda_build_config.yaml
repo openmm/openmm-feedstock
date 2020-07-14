@@ -4,3 +4,11 @@ opencl_impl:
 # cuda_impl:
 #   - cudatoolkit
 #   - systemcuda
+cuda_compiler_version:
+  - "10.2"
+docker_image:
+  - condaforge/linux-anvil-cuda:10.2
+python:
+  - 3.8.* *_cpython
+channel_targets:
+  - openmm testing
