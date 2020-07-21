@@ -2,7 +2,7 @@ conda_forge_output_validation: true
 github:
   user_or_org: openmm
 azure:
-  org_or_user: openmm
+  user_or_org: openmm
 channels:
   targets:
     - ["openmm", "testing"]
