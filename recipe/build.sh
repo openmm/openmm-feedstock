@@ -10,7 +10,6 @@ if [[ "$target_platform" == linux* ]]; then
     MINIMAL_CFLAGS+=" -O3 -ldl"
     CFLAGS+=" $MINIMAL_CFLAGS"
     CXXFLAGS+=" $MINIMAL_CFLAGS"
-    LDFLAGS+=" $LDPATHFLAGS"
 
     # Use GCC
     CMAKE_FLAGS+=" -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX"
