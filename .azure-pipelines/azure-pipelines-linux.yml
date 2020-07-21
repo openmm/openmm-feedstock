@@ -8,8 +8,12 @@ jobs:
     vmImage: ubuntu-16.04
   strategy:
     matrix:
-      linux_:
-        CONFIG: linux_
+      linux_opencl_implicdloader:
+        CONFIG: linux_opencl_implicdloader
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-cuda:10.2
+      linux_opencl_implicdsystem:
+        CONFIG: linux_opencl_implicdsystem
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-cuda:10.2
     maxParallel: 8

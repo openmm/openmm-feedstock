@@ -20,6 +20,8 @@ fftw:
 - '3'
 numpy:
 - '1.14'
+opencl_impl:
+- icdsystem
 pin_run_as_build:
   fftw:
     max_pin: x

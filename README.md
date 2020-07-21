@@ -36,10 +36,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux</td>
+              <td>linux_opencl_implicdloader</td>
               <td>
                 <a href="https://dev.azure.com/openmm/feedstock-builds/_build/latest?definitionId=3&branchName=master">
-                  <img src="https://dev.azure.com/openmm/feedstock-builds/_apis/build/status/openmm-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                  <img src="https://dev.azure.com/openmm/feedstock-builds/_apis/build/status/openmm-feedstock?branchName=master&jobName=linux&configuration=linux_opencl_implicdloader" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_opencl_implicdsystem</td>
+              <td>
+                <a href="https://dev.azure.com/openmm/feedstock-builds/_build/latest?definitionId=3&branchName=master">
+                  <img src="https://dev.azure.com/openmm/feedstock-builds/_apis/build/status/openmm-feedstock?branchName=master&jobName=linux&configuration=linux_opencl_implicdsystem" alt="variant">
                 </a>
               </td>
             </tr><tr>
