@@ -60,24 +60,33 @@ test:
     - simtk
     - simtk.openmm
   commands:
+    ### Basic tests
     - python -m simtk.testInstallation
-    # Existence tests Unix
+    ### Existence tests Unix
     - test -f $PREFIX/lib/libOpenMM$SHLIB_EXT  # [unix]
     - test -f $PREFIX/lib/plugins/libOpenMMCPU$SHLIB_EXT  # [unix]
     - test -f $PREFIX/lib/plugins/libOpenMMOpenCL$SHLIB_EXT  # [unix]
     - test -f $PREFIX/lib/plugins/libOpenMMCUDA$SHLIB_EXT  # [linux]
-    # Existence tests Windows
+    ### Existence tests Windows
     - if not exist %LIBRARY_LIB%/OpenMM.lib exit 1  # [win]
     - if not exist %LIBRARY_LIB%/plugins/OpenMMOpenCL.lib exit 1  # [win]
     - if not exist %LIBRARY_LIB%/plugins/OpenMMCPU.lib exit 1  # [win]
-    # Linux sees all 4 platforms, but CUDA is not usable because there's no GPU there
-    - python -c "from simtk.openmm import Platform as P; n = P.getNumPlatforms(); assert n == 4, f'n_platforms ({n}) != 4'"  # [linux]
-    # MacOS only sees 3 because CUDA is not available there
-    - python -c "from simtk.openmm import Platform as P; n = P.getNumPlatforms(); assert n == 3, f'n_platforms ({n}) != 3'"  # [osx]
-    # Debug silent errors in plugin loading
-    - python -c "import simtk.openmm as mm; print(mm.Platform.getPluginLoadFailures())"
-    # Debug hardcoded library path
+    ### Debug hardcoded library path
     - python -c "import os, simtk.openmm.version as v; print(v.openmm_library_path); assert os.path.isdir(v.openmm_library_path), 'Directory does not exist'"
+    ### Debug silent errors in plugin loading
+    - python -c "import simtk.openmm as mm; print(mm.Platform.getPluginLoadFailures())"
+    ### Platform visibility
+    # Linux can see all 4 platforms, but CUDA is not usable because there's no GPU there
+    # OpenCL is visible because we link against the ICD loader _and_ install `pocl` to provide a functional implementation
+    - python -c "from simtk.openmm import Platform as P; n = P.getNumPlatforms(); assert n == 4, f'n_platforms ({n}) != 4'"  # [linux and (opencl_impl == "icdloader")]
+    # If we link against nVidia's OpenCL, this is not visible without a GPU
+    - python -c "from simtk.openmm import Platform as P; n = P.getNumPlatforms(); assert n == 3, f'n_platforms ({n}) != 3'"  # [linux and (opencl_impl != "icdloader")]
+    # MacOS only sees 3 because CUDA is not available there
+    # OpenCL will be visible regardless what we link to
+    #  - pocl will be visible and loaded if we link against the ICD loader (in the future, it will be rejected too)
+    #  - Apple's will be visible, but it's rejected as not compatible
+    - python -c "from simtk.openmm import Platform as P; n = P.getNumPlatforms(); assert n == 3, f'n_platforms ({n}) != 3'"  # [osx]
+
 
 about:
   home: http://openmm.org
