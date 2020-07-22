@@ -27,7 +27,7 @@ jobs:
       export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
       export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
       # make sure there is a package directory so that artifact publishing works
-      mkdir -p /usr/local/miniconda/conda-bld/osx-64/
+      mkdir -p /Users/runner/miniforge3/conda-bld/osx-64/
       ./.scripts/run_osx_build.sh
     displayName: Run OSX build
     env:
@@ -35,5 +35,5 @@ jobs:
       FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
       STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
 
-  - publish: /usr/local/miniconda/conda-bld/osx-64/
-    artifact: conda_pkgs_osx
+  - publish: /Users/runner/miniforge3/conda-bld/osx-64/
+    artifact: $(CONFIG)

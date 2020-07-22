@@ -47,4 +47,4 @@ jobs:
       STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
 
   - publish: build_artifacts/linux-64/
-    artifact: conda_pkgs_linux
+    artifact: $(CONFIG)
