@@ -37,16 +37,16 @@ CMAKE_FLAGS+=" -DFFTW_THREADS_LIBRARY=${PREFIX}/lib/libfftw3f_threads${SHLIB_EXT
 if [[ "$opencl_impl" == icdloader ]]; then
     CMAKE_FLAGS+=" -DOPENCL_INCLUDE_DIR=${PREFIX}/include/"
     CMAKE_FLAGS+=" -DOPENCL_LIBRARY=${PREFIX}/lib/libOpenCL${SHLIB_EXT}"
-elif [[ "$target_platform" == linux* ]]; then
-    # If we don't use the ICD loader, on Linux we link to Nvidia's ICD
-    # CUDA_HOME must be set!
-    CUDA_HOME="${CUDA_HOME:-/usr/local/cuda}"
-    CMAKE_FLAGS+=" -DOPENCL_INCLUDE_DIR=${CUDA_HOME}/include/"
-    CMAKE_FLAGS+=" -DOPENCL_LIBRARY=${CUDA_HOME}/lib/libOpenCL${SHLIB_EXT}"
-elif [[ "$target_platform" == osx* ]]; then
-    # If we don't use the ICD loader, on MacOS we link to Apple's ICD
-    CMAKE_FLAGS+=" -DOPENCL_INCLUDE_DIR=/System/Library/Frameworks/OpenCL.framework/OpenCL/include/"
-    CMAKE_FLAGS+=" -DOPENCL_LIBRARY=/System/Library/Frameworks/OpenCL.framework/OpenCL/lib/libOpenCL${SHLIB_EXT}"
+# elif [[ "$target_platform" == linux* ]]; then
+#     # If we don't use the ICD loader, on Linux we link to Nvidia's ICD
+#     # CUDA_HOME must be set!
+#     CUDA_HOME="${CUDA_HOME:-/usr/local/cuda}"
+#     CMAKE_FLAGS+=" -DOPENCL_INCLUDE_DIR=${CUDA_HOME}/include/"
+#     CMAKE_FLAGS+=" -DOPENCL_LIBRARY=${CUDA_HOME}/lib/libOpenCL${SHLIB_EXT}"
+# elif [[ "$target_platform" == osx* ]]; then
+#     # If we don't use the ICD loader, on MacOS we link to Apple's ICD
+#     CMAKE_FLAGS+=" -DOPENCL_INCLUDE_DIR=/System/Library/Frameworks/OpenCL.framework/OpenCL/include/"
+#     CMAKE_FLAGS+=" -DOPENCL_LIBRARY=/System/Library/Frameworks/OpenCL.framework/OpenCL/lib/libOpenCL${SHLIB_EXT}"
 fi
 
 # Build in subdirectory and install.

@@ -16,6 +16,7 @@ build:
   skip: true  # [win]
   missing_dso_whitelist:
     - '*/libcuda.*'  # [linux]
+    - "*/libOpenCL.*"  # [unix]
   script_env:
     - opencl_impl
 
